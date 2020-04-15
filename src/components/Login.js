@@ -1,9 +1,14 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, Button } from 'react-native';
 
 export default class Login extends React.Component {
     constructor(props){
         super(props);
+
+        this.onPress = this.onPress.bind(this);
+    }
+    onPress(){
+        this.props.navigation.navigate('Timeline');
     }
 
     render() {
@@ -11,6 +16,7 @@ export default class Login extends React.Component {
             <View style={styles.container}>
                 <View style={styles.titleContainer}>
                     <Text style={styles.title}>Login Screen</Text>
+                    <Button title='go to timeline' onPress={this.onPress} />
                 </View>
             </View>
         )
