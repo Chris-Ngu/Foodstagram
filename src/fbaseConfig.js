@@ -14,4 +14,14 @@ export default class fbaseConfig {
     static init() {
         firebase.initializeApp(config);
     }
+    static register(email, password){
+        var error;
+
+        firebase
+        .auth()
+        .createUserWithEmailAndPassword(email, password)
+        .catch(
+            console.log("LOGIN ERROR HERE")
+        )
+    }
 }

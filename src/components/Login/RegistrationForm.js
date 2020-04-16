@@ -2,51 +2,34 @@ import React, { Component } from 'react';
 import { StyleSheet, View, TextInput, TouchableOpacity, Text } from 'react-native';
 import { Button } from 'react-native-paper';
 
+import fbconfig from '../../fbaseConfig';
 
-const bcrypt = require('bcrypt');
+
 
 export default class RegistrationForm extends Component {
     constructor(props) {
         super(props);
 
-        this.onChangeUsername = this.onChangeUsername.bind(this);
-        this.onChangeEmail = this.onChangeEmail.bind(this);
-        this.onChangePassword = this.onChangePassword.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
-
         this.state = {
             username: '',
-            email: '',
+            email: 'test',
             password: '',
+            confirmPassword: '',
             errorMessage: null
         };
 
+        this.onSubmit = this.onSubmit.bind(this);
     }
 
-    onChangeUsername(e) {
-        this.setState({ username: e.target.value });
-    }
-    onChangeEmail(e) {
-        this.setState({ email: e.target.value });
-    }
-    onChangePassword(e) {
-        this.setState({ password: e.target.value });
-    }
-    onSubmit(e) {
-        e.preventDefault();
-
-        firebase
-            .auth()
-            .createUserWithEmailAndPassword(this.state.email, this.state.password)
-            .then(() => this.props.navigation.navigate('Login'))
-            .catch(error => this.setState({ errorMessage: error.message }));
+    onSubmit() {
+        fbconfig.register(this.state.email, this.state.password);
+        //Handle errors here
+        this.props.navigation.navigate('Timeline');
 
         this.setState({
-            username: '',
             email: '',
             password: ''
         });
-
     }
 
     render() {
@@ -54,12 +37,14 @@ export default class RegistrationForm extends Component {
             <View style={styles.container}>
                 <TextInput
                     placeholder="Username"
+                    onChangeText={(text) => this.setState({username: text})}
                     placeholderTextColor="rgba(255,255,255,1)"
                     style={styles.input}>
 
                 </TextInput>
                 <TextInput
                     placeholder="E-mail"
+                    onChangeText={(text) => this.setState({email: text})}
                     placeholderTextColor="rgba(255,255,255,1)"
                     style={styles.input}>
 
@@ -68,21 +53,26 @@ export default class RegistrationForm extends Component {
                 <TextInput
                     placeholder="Password"
                     placeholderTextColor="rgba(255,255,255,1)"
+                    onChangeText={(password) => this.setState({password: password})}
                     secureTextEntry
                     style={styles.input}>
                 </TextInput>
                 <TextInput
                     placeholder="Confirm Password"
                     placeholderTextColor="rgba(255,255,255,1)"
+                    onChangeText={confirmPassword => this.setState({ confirmPassword: confirmPassword })}
                     secureTextEntry
                     style={styles.input}>
                 </TextInput>
 
 
-                <TouchableOpacity style={styles.buttonContainer} onPress={this.onSubmit}>
+                <TouchableOpacity
+                    style={styles.buttonContainer}
+                    onPress={this.onSubmit}>
                     <Text
-                        style={styles.buttonText}
-                    >REGISTER</Text>
+                        style={styles.buttonText}>
+                        REGISTER
+                        </Text>
                 </TouchableOpacity>
 
 
