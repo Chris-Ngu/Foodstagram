@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Image, Text } from 'react-native';
 
-import LoginForm from './LoginForm';
+import RegistrationForm from './RegistrationForm';
 
-export default class sample extends Component {
+export default class Registration extends Component {
     constructor(props) {
         super(props);
     }
@@ -16,10 +16,10 @@ export default class sample extends Component {
                         style={styles.logo}
                         source={require('../../Images/Sample.png')}>
                     </Image>
-                    <Text style={styles.text}>Snapshots of your food life!</Text>
+                    <Text style={styles.text}>Registration</Text>
                 </View>
                 <View style={styles.formContainer}>
-                    <LoginForm navigation={this.props.navigation} />
+                    <RegistrationForm navigation={this.props.navigation} />
                 </View>
             </View>
 

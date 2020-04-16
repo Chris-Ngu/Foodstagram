@@ -2,52 +2,52 @@ import React, { Component } from 'react';
 import { StyleSheet, View, TextInput, TouchableOpacity, Text } from 'react-native';
 import { Button } from 'react-native-paper';
 
-export default class LoginForm extends Component {
+
+const bcrypt = require('bcrypt');
+
+export default class RegistrationForm extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            username: '',
-            password: ''
-        }
         this.onChangeUsername = this.onChangeUsername.bind(this);
+        this.onChangeEmail = this.onChangeEmail.bind(this);
         this.onChangePassword = this.onChangePassword.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
-        this.registerPress = this.registerPress.bind(this);
+
+        this.state = {
+            username: '',
+            email: '',
+            password: '',
+            errorMessage: null
+        };
+
     }
 
     onChangeUsername(e) {
-        this.setState({
-            username: e.target.value
-        });
+        this.setState({ username: e.target.value });
     }
-
+    onChangeEmail(e) {
+        this.setState({ email: e.target.value });
+    }
     onChangePassword(e) {
-        this.setState({
-            password: e.target.value
-        });
+        this.setState({ password: e.target.value });
     }
-
     onSubmit(e) {
         e.preventDefault();
 
-        const user = {
-            username: this.state.username,
-            password: this.state.password
-        }
-
+        firebase
+            .auth()
+            .createUserWithEmailAndPassword(this.state.email, this.state.password)
+            .then(() => this.props.navigation.navigate('Login'))
+            .catch(error => this.setState({ errorMessage: error.message }));
 
         this.setState({
             username: '',
+            email: '',
             password: ''
-        })
+        });
 
     }
-
-    registerPress() {
-        this.props.navigation.navigate('Registration');
-    }
-
 
     render() {
         return (
@@ -55,33 +55,36 @@ export default class LoginForm extends Component {
                 <TextInput
                     placeholder="Username"
                     placeholderTextColor="rgba(255,255,255,1)"
-                    onChange={this.onChangeUsername}
                     style={styles.input}>
 
                 </TextInput>
                 <TextInput
+                    placeholder="E-mail"
+                    placeholderTextColor="rgba(255,255,255,1)"
+                    style={styles.input}>
+
+                </TextInput>
+
+                <TextInput
                     placeholder="Password"
                     placeholderTextColor="rgba(255,255,255,1)"
                     secureTextEntry
-                    onChange={this.onChangePassword}
                     style={styles.input}>
                 </TextInput>
+                <TextInput
+                    placeholder="Confirm Password"
+                    placeholderTextColor="rgba(255,255,255,1)"
+                    secureTextEntry
+                    style={styles.input}>
+                </TextInput>
+
 
                 <TouchableOpacity style={styles.buttonContainer} onPress={this.onSubmit}>
                     <Text
                         style={styles.buttonText}
-                    >LOGIN</Text>
+                    >REGISTER</Text>
                 </TouchableOpacity>
-                <Button
-                    mode="contained"
-                    color='white'
-                    onPress={this.registerPress}
-                    style={styles.forgotContainer}>
-                    <Text
-                        style={styles.forgotButton}>
-                        REGISTER
-                    </Text>
-                </Button>
+
 
             </View>
         )
@@ -103,17 +106,12 @@ const styles = StyleSheet.create({
     },
     buttonContainer: {
         backgroundColor: '#33ccff',
-        paddingVertical: 15
+        paddingVertical: 15,
+        transform: []
     },
     buttonText: {
         textAlign: 'center',
         color: '#FFFF',
         fontWeight: '700'
-    },
-    forgotContainer: {
-        marginTop: 10,
-        opacity: .9
-    },
-    forgotButton: {
     }
 })

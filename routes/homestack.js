@@ -3,6 +3,8 @@ import { createAppContainer } from 'react-navigation';
 import Login from '../src/components/Login';
 import Timeline from '../src/components/Timeline/Timeline';
 
+import Registration from '../src/components/Login/Registration';
+
 import Sample from '../src/components/Login/sample';
 
 const screens = {
@@ -11,6 +13,9 @@ const screens = {
     },
     Timeline: {
         screen: Sample
+    },
+    Registration: {
+        screen: Registration
     }
 }
 
