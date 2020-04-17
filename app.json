@@ -1,3 +1,4 @@
+  
 {
   "expo": {
     "name": "demo",
@@ -13,7 +14,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#ffcc66"
     },
     "updates": {
       "fallbackToCacheTimeout": 0

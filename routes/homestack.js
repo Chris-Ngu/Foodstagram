@@ -1,23 +1,29 @@
 import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer } from 'react-navigation';
-import Login from '../src/components/Login';
 import Timeline from '../src/components/Timeline/Timeline';
 
 import Registration from '../src/components/Login/Registration';
+import Login from '../src/components/Login/Login';
 
-import Sample from '../src/components/Login/sample';
 
-const screens = {
+const screens = createStackNavigator({
     Login: {
-        screen: Login
-    },
-    Timeline: {
-        screen: Sample
+        screen: Login,
+        navigationOptions: {
+            title: "Login",
+            header: false
+        }
     },
     Registration: {
-        screen: Registration
+        screen: Registration,
+        navigationOptions: {
+            title: 'Registration',
+            headerTintColor: 'white',
+            headerStyle: {
+                backgroundColor: '#ffcc66'
+            }
+        }
     }
-}
+})
 
-const HomeStack = createStackNavigator(screens);
-export default createAppContainer(HomeStack);
+export default createAppContainer(screens);

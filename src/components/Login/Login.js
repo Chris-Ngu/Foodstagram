@@ -3,7 +3,7 @@ import { StyleSheet, View, Image, Text } from 'react-native';
 
 import LoginForm from './LoginForm';
 
-export default class sample extends Component {
+export default class Login extends Component {
     constructor(props) {
         super(props);
     }

@@ -10,18 +10,17 @@ const config = {
     measurementId: "G-KMS4165V3H"
 };
 
-export default class fbaseConfig {    
+export default class fbaseConfig {
     static init() {
         firebase.initializeApp(config);
     }
-    static register(email, password){
-        var error;
+    static register(email, password) {
 
         firebase
-        .auth()
-        .createUserWithEmailAndPassword(email, password)
-        .catch(
-            console.log("LOGIN ERROR HERE")
-        )
+            .auth()
+            .createUserWithEmailAndPassword(email, password)
+            .catch((error) => {
+                console.log("Error: " + error)
+            })
     }
 }
