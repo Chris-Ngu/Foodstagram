@@ -2,50 +2,27 @@ import React, { Component } from 'react';
 import { StyleSheet, View, TextInput, TouchableOpacity, Text } from 'react-native';
 import { Button } from 'react-native-paper';
 
+import fbaseConfig from '../../fbaseConfig';
+
 export default class LoginForm extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            username: '',
+            email: '',
             password: ''
         }
-        this.onChangeUsername = this.onChangeUsername.bind(this);
-        this.onChangePassword = this.onChangePassword.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
+
         this.registerPress = this.registerPress.bind(this);
-    }
-
-    onChangeUsername(e) {
-        this.setState({
-            username: e.target.value
-        });
-    }
-
-    onChangePassword(e) {
-        this.setState({
-            password: e.target.value
-        });
-    }
-
-    onSubmit(e) {
-        e.preventDefault();
-
-        const user = {
-            username: this.state.username,
-            password: this.state.password
-        }
-
-
-        this.setState({
-            username: '',
-            password: ''
-        })
-
+        this.loginPressed = this.loginPressed.bind(this);
     }
 
     registerPress() {
         this.props.navigation.navigate('Registration');
+    }
+    loginPressed() {
+        fbaseConfig.login(this.state.email, this.state.password);
+        //this.props.navigation.replace('Timeline');
     }
 
 
@@ -53,25 +30,27 @@ export default class LoginForm extends Component {
         return (
             <View style={styles.container}>
                 <TextInput
-                    placeholder="Username"
+                    placeholder="Email"
                     placeholderTextColor="rgba(255,255,255,1)"
-                    onChange={this.onChangeUsername}
+                    onChangeText={(text) => this.setState({ email: text })}
                     style={styles.input}>
 
                 </TextInput>
+
                 <TextInput
                     placeholder="Password"
                     placeholderTextColor="rgba(255,255,255,1)"
                     secureTextEntry
-                    onChange={this.onChangePassword}
+                    onChangeText={(text) => this.setState({ password: text })}
                     style={styles.input}>
                 </TextInput>
 
-                <TouchableOpacity style={styles.buttonContainer} onPress={this.onSubmit}>
+                <TouchableOpacity style={styles.buttonContainer} onPress={this.loginPressed}>
                     <Text
                         style={styles.buttonText}
                     >LOGIN</Text>
                 </TouchableOpacity>
+
                 <Button
                     mode="contained"
                     color='white'
@@ -83,7 +62,7 @@ export default class LoginForm extends Component {
                     </Text>
                 </Button>
 
-            </View>
+            </View >
         )
     }
 }

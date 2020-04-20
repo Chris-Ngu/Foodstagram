@@ -23,6 +23,13 @@ const screens = createStackNavigator({
                 backgroundColor: '#ffcc66'
             }
         }
+    },
+    Timeline: {
+        screen: Timeline,
+        navigationOptions: {
+            title: "Timeline",
+            header: false
+        }
     }
 })
 

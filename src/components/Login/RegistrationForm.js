@@ -24,7 +24,7 @@ export default class RegistrationForm extends Component {
     onSubmit() {
         fbconfig.register(this.state.email, this.state.password);
         //Handle errors here
-        this.props.navigation.navigate('Timeline');
+        this.props.navigation.pop();
 
         this.setState({
             email: '',

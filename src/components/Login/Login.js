@@ -2,11 +2,20 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Image, Text } from 'react-native';
 
 import LoginForm from './LoginForm';
+import * as firebase from 'firebase';
 
 export default class Login extends Component {
     constructor(props) {
         super(props);
     }
+
+    /*
+    componentDidMount() {
+        firebase.auth().onAuthStateChanged(user => {
+            this.props.navigation.replace(user ? 'Login' : 'Timeline')
+        });
+    }
+    */
 
     render() {
         return (
@@ -38,8 +47,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     logo: {
-        width: 100,
-        height: 100
+        width: 150,
+        height: 150
     },
     text: {
         color: '#fff',

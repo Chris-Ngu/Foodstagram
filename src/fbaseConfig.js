@@ -23,4 +23,11 @@ export default class fbaseConfig {
                 console.log("Error: " + error)
             })
     }
+    static login(email, password) {
+        firebase
+            .auth()
+            .signInWithEmailAndPassword(email, password)
+            .then(() => this.props.navigation.navigate('Timeline'))
+            .catch(error => console.log(error));
+    }
 }
