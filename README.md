@@ -7,4 +7,4 @@ ___Login and Registration___
 * Check the forms for limitation (Matching passwords, etc...) on registration
 
 ___Firebase___
-Add username to the database for each account
+* Add username to the database for each account
