@@ -1,5 +1,12 @@
+
+
+
+
+
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
+
+import TabBar from '../TabBar';
 
 export default class Timeline extends React.Component {
     constructor(props) {
@@ -8,11 +15,7 @@ export default class Timeline extends React.Component {
 
     render() {
         return (
-            <View style={styles.container}>
-                <View style={styles.titleContainer}>
-                <Text style={styles.title}>Timeline Screen</Text>
-                </View>
-            </View>
+            <TabBar/>
         )
     }
 }

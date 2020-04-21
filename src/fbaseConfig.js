@@ -14,20 +14,4 @@ export default class fbaseConfig {
     static init() {
         firebase.initializeApp(config);
     }
-    static register(email, password) {
-
-        firebase
-            .auth()
-            .createUserWithEmailAndPassword(email, password)
-            .catch((error) => {
-                console.log("Error: " + error)
-            })
-    }
-    static login(email, password) {
-        firebase
-            .auth()
-            .signInWithEmailAndPassword(email, password)
-            .then(() => this.props.navigation.navigate('Timeline'))
-            .catch(error => console.log(error));
-    }
 }

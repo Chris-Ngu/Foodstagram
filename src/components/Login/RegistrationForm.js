@@ -3,6 +3,7 @@ import { StyleSheet, View, TextInput, TouchableOpacity, Text } from 'react-nativ
 import { Button } from 'react-native-paper';
 
 import fbconfig from '../../fbaseConfig';
+import * as firebase from 'firebase';
 
 
 
@@ -21,10 +22,13 @@ export default class RegistrationForm extends Component {
         this.onSubmit = this.onSubmit.bind(this);
     }
 
+    //Handle different types of errors here
     onSubmit() {
-        fbconfig.register(this.state.email, this.state.password);
-        //Handle errors here
-        this.props.navigation.pop();
+        firebase
+            .auth()
+            .createUserWithEmailAndPassword(this.state.email, this.state.password)
+            .then(() => this.props.navigation.pop())
+            .catch(error => console.log(error));
 
         this.setState({
             email: '',
@@ -37,14 +41,14 @@ export default class RegistrationForm extends Component {
             <View style={styles.container}>
                 <TextInput
                     placeholder="Username"
-                    onChangeText={(text) => this.setState({username: text})}
+                    onChangeText={(text) => this.setState({ username: text })}
                     placeholderTextColor="rgba(255,255,255,1)"
                     style={styles.input}>
 
                 </TextInput>
                 <TextInput
                     placeholder="E-mail"
-                    onChangeText={(text) => this.setState({email: text})}
+                    onChangeText={(text) => this.setState({ email: text })}
                     placeholderTextColor="rgba(255,255,255,1)"
                     style={styles.input}>
 
@@ -53,7 +57,7 @@ export default class RegistrationForm extends Component {
                 <TextInput
                     placeholder="Password"
                     placeholderTextColor="rgba(255,255,255,1)"
-                    onChangeText={(password) => this.setState({password: password})}
+                    onChangeText={(password) => this.setState({ password: password })}
                     secureTextEntry
                     style={styles.input}>
                 </TextInput>

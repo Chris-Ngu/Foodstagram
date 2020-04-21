@@ -3,6 +3,7 @@ import { StyleSheet, View, TextInput, TouchableOpacity, Text } from 'react-nativ
 import { Button } from 'react-native-paper';
 
 import fbaseConfig from '../../fbaseConfig';
+import * as firebase from 'firebase';
 
 export default class LoginForm extends Component {
     constructor(props) {
@@ -21,8 +22,13 @@ export default class LoginForm extends Component {
         this.props.navigation.navigate('Registration');
     }
     loginPressed() {
-        fbaseConfig.login(this.state.email, this.state.password);
+        //fbaseConfig.login(this.state.email, this.state.password);
         //this.props.navigation.replace('Timeline');
+        firebase
+            .auth()
+            .signInWithEmailAndPassword(this.state.email, this.state.password)
+            .then(() => this.props.navigation.replace('Timeline'))
+            .catch(error => console.log(error));
     }
 
 
