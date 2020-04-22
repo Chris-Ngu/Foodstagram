@@ -1,12 +1,9 @@
 
-
-
-
-
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 
 import TabBar from '../TabBar';
+import ImageSelector from '../ImageSelector';
 
 export default class Timeline extends React.Component {
     constructor(props) {
@@ -15,7 +12,8 @@ export default class Timeline extends React.Component {
 
     render() {
         return (
-            <TabBar/>
+            //<TabBar/>
+            <ImageSelector/>
         )
     }
 }
